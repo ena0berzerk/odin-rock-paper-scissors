@@ -22,16 +22,16 @@ function getComputerChoice() {
   }
 }
 
-// Parameter is case-insensitive function
-function playerSelectionParameterCaseInsensitive(word) {
-  word = word.toLowerCase();
-  let firstLetterUpper = word[0].toUpperCase();
-  return word.replace(word[0], firstLetterUpper);
-}
-
 // 2)
 // One round game logic
 function gameRound(playerSelection, computerSelection) {
+  // Function parameter is case-insensitive
+  function caseInsensitive() {
+    playerSelection = playerSelection.toLowerCase();
+    const firstLetterUp = playerSelection[0].toUpperCase();
+    return playerSelection.replace(playerSelection[0], firstLetterUp);
+  }
+  playerSelection = caseInsensitive();
   computerSelection = getComputerChoice();
   console.log(`Log run getComputerChoice(): ${computerSelection}`);
   if (playerSelection === "Rock") {
@@ -62,3 +62,5 @@ function gameRound(playerSelection, computerSelection) {
     return "Error message";
   }
 }
+
+console.log(gameRound("scisSOrs"));
