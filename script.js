@@ -1,6 +1,7 @@
 "use strict";
 
-// Функция игрок-компьютер
+// 1)
+// Function computer-player
 // СОЗДАТЬ функцию getComputerChoice()
 function getComputerChoice() {
   // СОЗДАТЬ переменную х = Рандомное число из 3
@@ -20,4 +21,37 @@ function getComputerChoice() {
       console.log("Error");
   }
 }
-const computerPlayer = getComputerChoice();
+
+// 2)
+// One round game logic
+function gameRound(playerSelection, computerSelection) {
+  computerSelection = getComputerChoice();
+  console.log(`Log run getComputerChoice(): ${computerSelection}`);
+  if (playerSelection === "Rock") {
+    if (computerSelection === "Scissors") {
+      return `You Win! ${playerSelection} beats ${computerSelection}!`;
+    } else if (computerSelection === "Paper") {
+      return `You Lose! ${computerSelection} beats ${playerSelection}!`;
+    } else if (computerSelection === "Rock") {
+      return `Draw! ${playerSelection} can't beat ${computerSelection}! Try again!`;
+    }
+  } else if (playerSelection === "Paper") {
+    if (computerSelection === "Rock") {
+      return `You Win! ${playerSelection} beats ${computerSelection}!`;
+    } else if (computerSelection === "Scissors") {
+      return `You Lose! ${computerSelection} beats ${playerSelection}!`;
+    } else if (computerSelection === "Paper") {
+      return `Draw! ${playerSelection} can't beat ${computerSelection}! Try again!`;
+    }
+  } else if (playerSelection === "Scissors") {
+    if (computerSelection === "Paper") {
+      return `You Win! ${playerSelection} beats ${computerSelection}!`;
+    } else if (computerSelection === "Rock") {
+      return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    } else if (computerSelection === "Scissors") {
+      return `Draw! ${playerSelection} can't beat ${computerSelection}! Try again!`;
+    }
+  } else {
+    return "Error message";
+  }
+}
