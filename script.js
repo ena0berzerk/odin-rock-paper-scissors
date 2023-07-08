@@ -1,80 +1,52 @@
-"use strict";
+// DOM
+const player = document.querySelector(".player");
+const computer = document.querySelector(".computer");
+const result = document.querySelector(".result-span");
+const buttons = document.querySelectorAll("button");
 
-function getComputerChoice() {
-  const getRandomNum = Math.floor(Math.random() * 3 + 1);
-  switch (getRandomNum) {
+buttons.forEach((eachBtn) => {
+  eachBtn.addEventListener("click", () => {
+    let rock = eachBtn.dataset.rock;
+    let paper = eachBtn.dataset.paper;
+    let scissors = eachBtn.dataset.scissors;
+    if (rock) playRound(rock);
+    if (paper) playRound(paper);
+    if (scissors) playRound(scissors);
+  });
+});
+
+// Computer random output between Rock, Paper, Scissors
+function getComputerChoise() {
+  let arr = ["Rock", "Paper", "Scissors"];
+  let calcRandom = Math.floor(Math.random() * arr.length);
+  switch (calcRandom) {
+    case 0:
+      return arr[0];
     case 1:
-      return "Rock";
+      return arr[1];
     case 2:
-      return "Paper";
-    case 3:
-      return "Scissors";
-    default:
-      return "Error message";
+      return arr[2];
   }
+  return calcRandom;
 }
 
+// CONST variables
 const PLAYER_WIN_ROUND = `You Won this round!`;
 const COMP_WIN_ROUND = `You Lose this round!`;
 const DRAW = `It's Draw!`;
 const PLAYER_WIN_GAME = `You Won this game! Congratulations!`;
 const COMP_WIN_GAME = `You Lose this game! Try again!`;
 
-let playerScore = 0;
-let computerScore = 0;
-
 function playRound(playerSelection, computerSelection) {
-  computerSelection = getComputerChoice();
-  playerSelection = prompt(playerSelection);
-
-  // if user tap 'ESC' btn, click 'Cancel' or 'OK' without data inside
-  if (playerSelection === "" || playerSelection === null) {
-    return `Cancel input`;
-  }
-
-  // implement case-insensitive of playerSelection parameter
-  playerSelection = playerSelection.toLowerCase();
-  const firstLetter = playerSelection[0].toUpperCase();
-  playerSelection = playerSelection.replace(playerSelection[0], firstLetter);
-
+  computerSelection = getComputerChoise();
   if (playerSelection === computerSelection) {
-    const draw = `${DRAW} Opponent had ${computerSelection} and you ${playerSelection}`;
-    return draw;
+    result.textContent = `${DRAW} You have ${playerSelection} and Computer have ${computerSelection}`;
   } else if (playerSelection === "Rock" && computerSelection === "Scissors") {
-    return `${PLAYER_WIN_ROUND} ${playerSelection} beats ${computerSelection}`;
+    result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
   } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-    return `${PLAYER_WIN_ROUND} ${playerSelection} beats ${computerSelection}`;
+    result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
   } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
-    return `${PLAYER_WIN_ROUND} ${playerSelection} beats ${computerSelection}`;
-  } else {
-    return `${COMP_WIN_ROUND} Computer had ${computerSelection} and you ${playerSelection}`;
-  }
+    result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
+  } else
+    result.textContent = `${COMP_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
 }
-
-function gameOver() {
-  if (playerScore > computerScore) {
-    return PLAYER_WIN_GAME;
-  } else if (playerScore < computerScore) {
-    return COMP_WIN_GAME;
-  } else if (playerScore === computerScore) {
-    return DRAW;
-  }
-}
-
-function game() {
-  const gameRound = playRound();
-  if (gameRound.match(`${PLAYER_WIN_ROUND}`)) {
-    ++playerScore;
-  } else if (gameRound.match(`${COMP_WIN_ROUND}`)) {
-    ++computerScore;
-  }
-  console.log(gameRound);
-  console.log(playerScore, computerScore);
-}
-
-console.log(game());
-console.log(game());
-console.log(game());
-console.log(game());
-console.log(game());
-console.log(gameOver());
