@@ -1,17 +1,40 @@
 // DOM
-const player = document.querySelector(".player");
-const computer = document.querySelector(".computer");
-const result = document.querySelector(".result-span");
+const player = document.querySelector(".player-span");
+const computer = document.querySelector(".computer-span");
 const buttons = document.querySelectorAll("button");
+const rockButton = document.querySelector(".rock");
+const result = document.querySelector(".result");
+const finalText = document.querySelector(".final-text");
+
+let playerScore = 0;
+let computerScore = 0;
+
+// helper function
+function setDisableButton() {
+  buttons.forEach((el) => {
+    el.setAttribute("id", "disabled");
+    el.disabled = true;
+  });
+}
 
 buttons.forEach((eachBtn) => {
   eachBtn.addEventListener("click", () => {
     let rock = eachBtn.dataset.rock;
     let paper = eachBtn.dataset.paper;
     let scissors = eachBtn.dataset.scissors;
-    if (rock) playRound(rock);
-    if (paper) playRound(paper);
-    if (scissors) playRound(scissors);
+    if (rock) {
+      playRound(rock);
+      playGame();
+    }
+    if (paper) {
+      playRound(paper);
+      playGame();
+    }
+
+    if (scissors) {
+      playRound(scissors);
+      playGame();
+    }
   });
 });
 
@@ -31,8 +54,8 @@ function getComputerChoise() {
 }
 
 // CONST variables
-const PLAYER_WIN_ROUND = `You Won this round!`;
-const COMP_WIN_ROUND = `You Lose this round!`;
+const PLAYER_WIN_ROUND = `You Won!`;
+const COMP_WIN_ROUND = `You Lose!`;
 const DRAW = `It's Draw!`;
 const PLAYER_WIN_GAME = `You Won this game! Congratulations!`;
 const COMP_WIN_GAME = `You Lose this game! Try again!`;
@@ -40,13 +63,36 @@ const COMP_WIN_GAME = `You Lose this game! Try again!`;
 function playRound(playerSelection, computerSelection) {
   computerSelection = getComputerChoise();
   if (playerSelection === computerSelection) {
-    result.textContent = `${DRAW} You have ${playerSelection} and Computer have ${computerSelection}`;
+    return (result.textContent = `${DRAW} You have ${playerSelection} and Computer have ${computerSelection}`);
   } else if (playerSelection === "Rock" && computerSelection === "Scissors") {
-    result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
+    player.textContent = ++playerScore;
+    return (result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} Computer have ${computerSelection}`);
   } else if (playerSelection === "Paper" && computerSelection === "Rock") {
-    result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
+    player.textContent = ++playerScore;
+    return (result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`);
   } else if (playerSelection === "Scissors" && computerSelection === "Paper") {
-    result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
-  } else
+    player.textContent = ++playerScore;
+    return (result.textContent = `${PLAYER_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`);
+  } else {
+    computer.textContent = ++computerScore;
     result.textContent = `${COMP_WIN_ROUND} You have ${playerSelection} and Computer have ${computerSelection}`;
+  }
+}
+
+function playGame() {
+  if (playerScore >= 5 && computerScore < 5) {
+    finalText.classList.toggle("hidden");
+    finalText.classList.toggle("win");
+    finalText.textContent = "you win";
+    setDisableButton();
+  } else if (computerScore >= 5 && playerScore < 5) {
+    finalText.classList.toggle("hidden");
+    finalText.classList.toggle("lose");
+    finalText.textContent = "you lose";
+    // result.textContent = "Game over! You lost! Try again!";
+    setDisableButton();
+  } else if (computerScore === 5 && playerScore === 5) {
+    result.textContent = `Game over! It's a tie!`;
+    setDisableButton();
+  }
 }
