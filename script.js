@@ -92,7 +92,7 @@ function playGame() {
     // result.textContent = "Game over! You lost! Try again!";
     setDisableButton();
   } else if (computerScore === 5 && playerScore === 5) {
-    result.textContent = `Game over! It's a tie!`;
+    result.textContent = `Game over!`;
     setDisableButton();
   }
 }
