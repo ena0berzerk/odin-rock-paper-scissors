@@ -1,8 +1,6 @@
 # Rock-paper-scissors
 
-### Created as part of [The Odin Project](https://www.theodinproject.com) Javascript curriculum.
-
-#### Preview: [The Odin Project](https://www.theodinproject.com)
+### Preview: [The Odin Project](https://www.theodinproject.com)
 
 ## Description
 
