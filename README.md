@@ -1,7 +1,9 @@
-# Odin Rock-Paper-Scissors App
+# Rock-paper-scissors
 
-#3 project
+### Created as part of [The Odin Project](https://www.theodinproject.com) Javascript curriculum.
 
-Разработка приложения "Камень-ножницы-бумага" в качестве третьего проекта на бесплатном куррикулуме от [The Odin Project](https://www.theodinproject.com)
+#### Preview: [The Odin Project](https://www.theodinproject.com)
 
-Link: [Rock-Paper-Scissors](https://ena0berzerk.github.io/odin-rock-paper-scissors/)
+## Description
+
+A world-famous game written in JavaScript
