@@ -1,6 +1,6 @@
 # Rock-paper-scissors
 
-### Preview: [The Odin Project](https://www.theodinproject.com)
+### Preview: [Rock-paper-scissors](https://ena0berzerk.github.io/odin-rock-paper-scissors/)
 
 ## Description
 
